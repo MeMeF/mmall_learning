@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--引入属性文件-->
+    <properties resource="datasource.properties"></properties>
+    <!--添加jar包的绝对路径-->
+    <classPathEntry location="${db.driverlocation}"></classPathEntry>
+    <context id="default" targetRuntime="Mybatis3">
+        <commentGenerator>
+            <!--去除时间戳-->
+            <property name="suppressDate" value="true"/>
+            <!--是否去除生产的注释-->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--添加数据库的基本链接-->
+        <jdbcConnection
+                driverClass="${db.driverClassName}"
+                connectionURL="${db.url}"
+                userId="${db.username}"
+                password="${db.password}">
+        </jdbcConnection>
+
+        <!--生成java类型-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"></property>
+        </javaTypeResolver>
+        <!--生成的实体类存在的包-->
+        <javaModelGenerator targetPackage="com.sgm.entity" targetProject="./src/main/java">
+            <!--是否生成子包-->
+            <property name="enableSubPackages" value="false"></property>
+            <!--构建包含所有字段的构造器-->
+            <property name="constructorBased" value="true"></property>
+            <!--对CHAR的数据库字段，调用trim()方法-->
+            <property name="trimStrings" value="true"></property>
+            <!--生成的实体类带有setter方法，false表示该类可变-->
+            <property name="immutable" value="false"></property>
+        </javaModelGenerator>
+        <!--mybaits映射文件的位置-->
+        <sqlMapGenerator targetPackage="mappers" targetProject="./src/main/resources">
+            <property name="enableSubPackages" value="true"></property>
+        </sqlMapGenerator>
+        <!--数据操作接口的存在位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.sgm.dao" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true"></property>
+        </javaClientGenerator>
+
+        <!--数据库中的表到pojo类的映射，后面的false表示不产生对应的示例数据库语句，一切语句人工操作-->
+        <table tableName="mmall_shipping" domainObjectName="Shipping" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="mmall_cart" domainObjectName="Cart" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="mmall_cart_item" domainObjectName="CartItem" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="mmall_category" domainObjectName="Category" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="mmall_order" domainObjectName="Order" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="mmall_order_item" domainObjectName="OrderItem" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="mmall_pay_info" domainObjectName="PayInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="mmall_product" domainObjectName="Product" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <columnOverride column="detail" jdbcType="VARCHAR" />
+            <columnOverride column="sub_images" jdbcType="VARCHAR" />
+        </table>
+        <table tableName="mmall_user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    </context>
+
+</generatorConfiguration>
